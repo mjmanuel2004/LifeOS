@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(20, 20, 20, 0.6);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+  --aurora-1: #2563eb;
+  /* Blue */
+  --aurora-2: #db2777;
+  /* Pink */
+  --aurora-3: #0891b2;
+  /* Cyan */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000000;
+  /* OLED Black */
+  color: #f8fafc;
+  /* Slate 50 */
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Aurora Background Animation */
+.aurora-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15), transparent 40%),
+    radial-gradient(circle at 90% 50%, rgba(219, 39, 119, 0.15), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(8, 145, 178, 0.15), transparent 40%);
+  filter: blur(60px);
+  opacity: 0.8;
+  animation: aurora-move 20s infinite alternate ease-in-out;
+}
+
+@keyframes aurora-move {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  50% {
+    transform: scale(1.05) translate(-1%, 1%);
+  }
+
+  100% {
+    transform: scale(1) translate(1%, -1%);
+  }
+}
+
+/* Apple-style Glassmorphism */
+.glass-panel {
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card {
+  background: rgba(30, 30, 30, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1), background 0.3s ease;
+}
+
+.glass-card:active {
+  transform: scale(0.98);
+}
+
+/* Mobile-first specific adjustments */
+.glass-tab-bar {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Inputs */
+.glass-input {
+  background: rgba(30, 30, 30, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s;
+  font-size: 16px;
+  /* Prevent zoom on iOS */
+}
+
+.glass-input:focus {
+  background: rgba(40, 40, 40, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Utils */
+.text-balance {
+  text-wrap: balance;
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}

@@ -1,0 +1,15 @@
+<step title="Incoming Request" date="2026-02-19T21:14:05.757" instance="0616be" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="837,1,38" Accept="*/*" Host="lifeos-api-monsan-chbwhhg9dughb0g7.scm.francecentral-01.azurewebsites.net" User-Agent="AZURECLI/2.83.0 (HOMEBREW)" Accept-Encoding="gzip, deflate" Authorization="Bea..." Cache-Control="no-cache" Content-Type="application/octet-stream" Content-Length="80854" x-ms-client-request-id="ea72898c-0dd7-11f1-aa83-5279b83a7547" x-ms-artifact-checksum="463506d8abcc311076b9c9bf054363a37a09988fe40b29be88f34059843727dc" X-ARR-LOG-ID="ea72898c-0dd7-11f1-aa83-5279b83a7547" CLIENT-IP="46.193.67.70:61941" X-SITE-DEPLOYMENT-ID="lifeos-api-monsan" WAS-DEFAULT-HOSTNAME="lifeos-api-monsan-chbwhhg9dughb0g7.scm.francecentral-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-Client-IP="46.193.67.70" X-Client-Port="61941" >
+  <step title="Cleanup Xml Logs" date="2026-02-19T21:14:05.768" /><!-- duration: 15ms -->
+  <step title="ZipPushDeploy" date="2026-02-19T21:14:05.930" >
+    <step title="ZipDeploy. Extract zip." date="2026-02-19T21:14:06.017" /><!-- duration: 15ms -->
+    <step title="Starting PushDeployAsync" date="2026-02-19T21:14:06.041" /><!-- duration: 7ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/5b2b1f75-b29d-43ef-bcfc-3e2de49d0687.zip" date="2026-02-19T21:14:06.100" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/5b2b1f75-b29d-43ef-bcfc-3e2de49d0687.zip" date="2026-02-19T21:14:06.132" /><!-- duration: 9ms -->
+    </step><!-- duration: 105ms -->
+    <step title="Start deployment in the background" date="2026-02-19T21:14:06.231" >
+      <step title="Acquiring Deployment Lock" date="2026-02-19T21:14:06.256" /><!-- duration: 45ms -->
+      <step title="Acquired Deployment Lock" date="2026-02-19T21:14:06.405" /><!-- duration: 18ms -->
+    </step><!-- duration: 517ms -->
+  </step><!-- duration: 887ms -->
+  <step title="Outgoing response" date="2026-02-19T21:14:06.843" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 10ms -->
+</step><!-- duration: 1108ms -->
