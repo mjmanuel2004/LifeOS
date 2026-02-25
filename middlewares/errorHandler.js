@@ -47,6 +47,7 @@ const sendErrorProd = (err, res) => {
 };
 
 const globalErrorHandler = (err, req, res, _next) => {
+  console.error("GLOBAL ERROR CATCHER:", err);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
@@ -58,7 +59,8 @@ const globalErrorHandler = (err, req, res, _next) => {
 
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
-    if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+    // Mongoose Validation Error
+    if (err.name === 'ValidationError') error = handleValidationErrorDB(err);
 
     sendErrorProd(error, res);
   }

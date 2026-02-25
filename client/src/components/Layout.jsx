@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   Plus,
-  MoreHorizontal
+  MoreHorizontal,
+  LogOut
 } from 'lucide-react';
 import { useState } from 'react';
 import clsx from 'clsx';
@@ -20,6 +21,7 @@ import ScanResultModal from './ScanResultModal';
 import NotificationCenter from './NotificationCenter';
 import AuroraBackground from './AuroraBackground';
 import useCoreIntelligence from '../hooks/useCoreIntelligence';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
@@ -34,6 +36,7 @@ const navItems = [
 export default function Layout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
   const [scanResult, setScanResult] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
 
@@ -112,13 +115,34 @@ export default function Layout() {
             </div>
           </div>
 
-          <div className="p-4 mt-auto">
+          <div className="p-4 mt-auto flex flex-col gap-3">
+            {/* Profile Button */}
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                clsx(
+                  'flex items-center gap-2 w-full py-3 rounded-xl transition-colors font-medium px-4 border border-white/5',
+                  isActive ? 'bg-white/10 text-white' : 'bg-transparent text-slate-400 hover:bg-white/5 hover:text-white'
+                )
+              }
+            >
+              <Settings size={18} />
+              <span>Mon Profil</span>
+            </NavLink>
+
             {/* Scan Button on Desktop Sidebar */}
             <label className="flex items-center justify-center gap-2 w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl cursor-pointer transition-colors font-medium shadow-lg shadow-blue-900/20">
               <Plus size={18} />
               <span>Scanner un ticket</span>
               <input type="file" accept="image/*" className="hidden" onChange={(e) => e.target.files?.[0] && handleScan(e.target.files[0])} />
             </label>
+            <button
+              onClick={logout}
+              className="flex items-center justify-center gap-2 w-full py-3 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-xl transition-colors font-medium"
+            >
+              <LogOut size={18} />
+              <span>Se déconnecter</span>
+            </button>
           </div>
         </aside>
 
@@ -212,6 +236,10 @@ export default function Layout() {
                     <Settings className="text-cyan-400" />
                     <span className="text-xs">Assistant</span>
                   </NavLink>
+                  <button onClick={() => { setIsMobileMenuOpen(false); logout(); }} className="flex flex-col items-center gap-2 p-3 rounded-2xl bg-red-500/10 active:bg-red-500/20 text-red-500">
+                    <LogOut size={24} />
+                    <span className="text-xs">Quitter</span>
+                  </button>
                 </div>
               </motion.div>
             </>

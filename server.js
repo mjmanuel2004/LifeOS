@@ -24,6 +24,13 @@ import globalErrorHandler from './middlewares/errorHandler.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// 1. Définir proprement les chemins
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const buildPath = path.join(__dirname, 'client', 'dist');
+
 // CORS configuration
 const allowedOrigins = [
   'http://localhost:5173', // Local dev
@@ -45,6 +52,10 @@ app.use(
 );
 
 app.use(express.json());
+
+// 2. Servir les fichiers statiques (DOIT être avant les routes API pour éviter les conflits,
+// mais surtout avant le catch-all)
+app.use(express.static(buildPath));
 
 // Routes API
 app.use('/api/taches', tachesRoutes);
@@ -69,15 +80,26 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'success', message: 'LifeOS API' });
 });
 
-// Root route
-// Root route - Health Check
-app.get('/', (req, res) => {
+// Root route - Health Check (API only)
+app.get('/api', (req, res) => {
   res.status(200).json({ status: 'LifeOS API is running', env: process.env.NODE_ENV });
 });
 
+// 4. LE HANDLER REACT (CATCH-ALL)
+// Important : Cette route doit être la DERNIÈRE avant le gestionnaire d'erreurs
+app.get('*', (req, res, next) => {
+  // Si la requête commence par /api, on ne sert pas l'index.html,
+  // on laisse passer vers le gestionnaire 404
+  if (req.url.startsWith('/api')) {
+    return next();
+  }
+  res.sendFile(path.join(buildPath, 'index.html'));
+});
 
-// Handle undefined routes
-app.all('*', (req, res, next) => {
+// 5. Gestion des routes API non trouvées (Uniquement pour le préfixe /api)
+// Cette partie est en fait gérée par le globalErrorHandler si next() est appelé,
+// mais on peut expliciter le 404 ici pour être sûr.
+app.all('/api/*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

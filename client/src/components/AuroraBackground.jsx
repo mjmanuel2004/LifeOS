@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 
 const MOODS = {
     calm: {
-        orb1: "bg-indigo-600/20",
-        orb2: "bg-purple-600/20",
-        orb3: "bg-emerald-600/10"
+        orb1: "bg-blue-600/20",
+        orb2: "bg-pink-600/20",
+        orb3: "bg-cyan-600/20"
     },
     danger: {
         orb1: "bg-red-600/30",

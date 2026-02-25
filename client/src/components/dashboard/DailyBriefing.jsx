@@ -69,7 +69,7 @@ export default function DailyBriefing({ data }) {
                         </div>
                     </div>
                     <button
-                        onClick={loadBriefing}
+                        onClick={refresh}
                         className="p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
                     >
                         <RefreshCw size={16} />

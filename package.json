@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "server": "node --watch server.js",
+    "server": "node --watch-path=./server.js --watch-path=./controllers --watch-path=./routes --watch-path=./models --watch-path=./utils --watch-path=./middlewares server.js",
     "client": "cd client && npm run dev",
+    "build:full": "cd client && npm install && npm run build && cd ..",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -15,14 +16,19 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "apple-signin-auth": "^2.0.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "google-auth-library": "^10.5.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.8.0",
     "multer": "^2.0.2",
     "node-ical": "^0.16.1",
+    "nodemailer": "^8.0.1",
+    "otplib": "^13.3.0",
+    "qrcode": "^1.5.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
